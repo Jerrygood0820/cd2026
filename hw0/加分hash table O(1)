@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+
+    FILE *fp;
+
+    fp = fopen("main.c", "r");
+
+    if (fp == NULL) {
+        printf("Cannot open file\n");
+        return 1;
+    }
+
+    int count[256] = {0};
+
+    char c;
+
+    while ((c = fgetc(fp)) != EOF) {
+        count[(unsigned char)c]++;
+    }
+
+    fclose(fp);
+
+    for (int i = 0; i < 256; i++) {
+        if (count[i] > 0) {
+            printf("%c : %d\n", i, count[i]);
+        }
+    }
+
+    return 0;
+}
